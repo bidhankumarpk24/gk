@@ -20,54 +20,53 @@ button{font:inherit;cursor:pointer}.wrap{width:min(1120px,92%);margin:auto}.top{
 @media(max-width:500px){.grid{grid-template-columns:1fr 1fr}.cat{padding:15px}.section{padding:28px 0}.hero{border-radius:22px}.hero p{font-size:16px}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+.top-actions{display:flex;gap:8px}.lang-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;color:var(--green);font-weight:800;min-width:58px}
+.site-footer{margin:55px 0 25px;border:1px solid var(--line);background:linear-gradient(145deg,var(--card),rgba(255,255,255,.55));border-radius:28px;padding:26px;box-shadow:0 18px 50px rgba(16,35,29,.09)}
+.footer-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.footer-title{font-size:21px;font-weight:800;margin-bottom:5px}.footer-sub{color:var(--muted);line-height:1.55}.social-title{font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}.socials{display:flex;gap:12px;flex-wrap:wrap}.social{width:50px;height:50px;display:grid;place-items:center;border-radius:16px;background:var(--card);border:1px solid var(--line);text-decoration:none;font-size:21px;box-shadow:0 8px 20px rgba(16,35,29,.08);transition:.2s}.social:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(16,35,29,.14)}.footer-bottom{border-top:1px solid var(--line);margin-top:22px;padding-top:17px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:14px}.love-heart{display:inline-block;animation:heartBeat 1.05s infinite}@keyframes heartBeat{0%,100%{transform:scale(1)}35%{transform:scale(1.3)}60%{transform:scale(1.06)}}
+.floating-lang{position:fixed;right:18px;bottom:18px;z-index:30;width:52px;height:52px;border:0;border-radius:50%;background:var(--green);color:#fff;font-weight:900;box-shadow:0 12px 30px rgba(0,106,78,.3)}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr}.site-footer{padding:22px}.socials{gap:12px}}@media(max-width:500px){.site-footer{border-radius:22px;padding:20px;margin-top:38px}.social{width:52px;height:52px;border-radius:15px;font-size:22px}.footer-bottom{display:block;text-align:center;line-height:1.8}.floating-lang{right:14px;bottom:14px}}
+</style>
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand"><span class="flag"></span> Bangladesh GK</div><button class="pill" onclick="toggleTheme()">◐ Theme</button></header>
+<header class="top"><div class="brand"><span class="flag"></span><span id="brandText">বাংলাদেশ GK</span></div><div class="top-actions"><button class="pill" onclick="toggleTheme()" id="themeBtn">◐ থিম</button><button class="lang-btn" onclick="toggleLanguage()" id="langBtn">EN</button></div></header>
 
 <section class="hero" id="home">
 <div>
-<span class="tag">🇧🇩 Unlimited Knowledge Challenge</span>
-<h1>How well do you know Bangladesh?</h1>
-<p>Test yourself with an endless stream of Bangladesh-focused general knowledge questions. Pick a category or mix everything together.</p>
-<div class="actions"><button class="primary" onclick="startQuiz('All')">Start Unlimited Quiz →</button><button class="secondary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Explore Categories</button></div>
+<span class="tag" id="tagText">🇧🇩 আনলিমিটেড জ্ঞান চ্যালেঞ্জ</span>
+<h1 id="heroTitle">বাংলাদেশ সম্পর্কে আপনি কতটা জানেন?</h1>
+<p id="heroSub">বাংলাদেশভিত্তিক সাধারণ জ্ঞানের অসংখ্য প্রশ্নে নিজের জ্ঞান যাচাই করুন। চাইলে নির্দিষ্ট ক্যাটাগরি বেছে নিন, অথবা সব ক্যাটাগরি একসঙ্গে খেলুন।</p>
+<div class="actions"><button class="primary" onclick="startQuiz('All')" id="startBtn">কুইজ শুরু করুন →</button><button class="secondary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})" id="exploreBtn">ক্যাটাগরি দেখুন</button></div>
 </div>
 </section>
 
 <section class="section" id="categories">
-<div class="section-head"><div><h2>Choose a category</h2><p>Questions are shuffled automatically.</p></div></div>
-<div class="grid">
-<button class="cat" onclick="startQuiz('History')"><div class="icon">📜</div><b>History</b><small>Past & heritage</small></button>
-<button class="cat" onclick="startQuiz('Geography')"><div class="icon">🗺️</div><b>Geography</b><small>Land, rivers & places</small></button>
-<button class="cat" onclick="startQuiz('Liberation War')"><div class="icon">🕊️</div><b>Liberation War</b><small>1971 & independence</small></button>
-<button class="cat" onclick="startQuiz('Culture')"><div class="icon">🎭</div><b>Culture</b><small>Arts & traditions</small></button>
-<button class="cat" onclick="startQuiz('National')"><div class="icon">🇧🇩</div><b>National</b><small>Symbols & facts</small></button>
-<button class="cat" onclick="startQuiz('Sports')"><div class="icon">🏏</div><b>Sports</b><small>Bangladesh in sport</small></button>
-<button class="cat" onclick="startQuiz('Science')"><div class="icon">🔬</div><b>Science</b><small>Science & nature</small></button>
-<button class="cat" onclick="startQuiz('Districts')"><div class="icon">📍</div><b>Districts</b><small>Administrative facts</small></button>
-</div>
+<div class="section-head"><div><h2 id="chooseTitle">ক্যাটাগরি বেছে নিন</h2><p id="shuffleText">প্রশ্নগুলো স্বয়ংক্রিয়ভাবে এলোমেলো হবে।</p></div></div>
+<div class="grid" id="categoryGrid"></div>
 </section>
 
 <section class="quiz" id="quiz">
 <div class="quizbox">
-<div class="quiztop"><span class="counter" id="counter">Question 1</span><span class="score" id="score">Score: 0</span></div>
+<div class="quiztop"><span class="counter" id="counter">প্রশ্ন ১</span><span class="score" id="score">স্কোর: ০</span></div>
 <div class="bar"><span id="progress"></span></div>
-<div class="qmeta"><span class="chip" id="category">General</span><span class="chip" id="difficulty">Mixed</span></div>
+<div class="qmeta"><span class="chip" id="category">সাধারণ</span><span class="chip" id="difficulty">মিশ্র</span></div>
 <h2 class="question" id="question"></h2>
 <div class="options" id="options"></div>
-<div class="hint"><button onclick="showHint()">💡 Show hint</button><p id="hint"></p></div>
-<div class="bottom"><button class="pill" onclick="backHome()">← Categories</button><button class="next" id="next" onclick="nextQuestion()" disabled>Next Question →</button></div>
+<div class="hint"><button onclick="showHint()" id="hintBtn">💡 ইঙ্গিত</button><p id="hint"></p></div>
+<div class="bottom"><button class="pill" onclick="backHome()" id="catBtn">← ক্যাটাগরি</button><button class="next" id="next" onclick="nextQuestion()" disabled>পরের প্রশ্ন →</button></div>
 </div>
 </section>
 
 <section class="quizbox result" id="result">
-<div class="big" id="resultScore">0%</div><h2>Quiz session complete</h2><p id="resultText"></p>
-<div class="actions" style="justify-content:center"><button class="primary" onclick="restart()">Play Again</button><button class="pill" onclick="backHome()">Choose Category</button></div>
+<div class="big" id="resultScore">0%</div><h2 id="resultTitle">কুইজ সেশন শেষ!</h2><p id="resultText"></p>
+<div class="actions" style="justify-content:center"><button class="primary" onclick="restart()" id="againBtn">আবার খেলুন</button><button class="pill" onclick="backHome()" id="chooseAgainBtn">ক্যাটাগরি বেছে নিন</button></div>
 </section>
-<footer>Made for Bangladesh GK practice • Works as a static GitHub Pages site</footer>
+
 </div>
 <script>
-const questions=[
+const questionsEn=[
 {c:"National",d:"Easy",q:"What is the national flower of Bangladesh?",o:["Rose","Water lily (Shapla)","Jasmine","Marigold"],a:1,h:"It is an aquatic flower commonly found in Bangladesh."},
 {c:"National",d:"Easy",q:"What is the national animal of Bangladesh?",o:["Royal Bengal tiger","Asian elephant","Leopard","Spotted deer"],a:0,h:"Think of the famous big cat associated with the Sundarbans."},
 {c:"National",d:"Easy",q:"What is the national fruit of Bangladesh?",o:["Mango","Jackfruit","Banana","Guava"],a:1,h:"It is a large fruit with a distinctive sweet aroma and many fleshy bulbs."},
@@ -94,71 +93,60 @@ const questions=[
 {c:"Geography",d:"Medium",q:"Bangladesh is located in which part of Asia?",o:["South Asia","East Asia","Central Asia","West Asia"],a:0,h:"It is part of the Indian subcontinent."}
 ];
 
+
+const BN_TRANSLATIONS = {"q": ["বাংলাদেশের জাতীয় ফুল কোনটি?", "বাংলাদেশের জাতীয় প্রাণী কোনটি?", "বাংলাদেশের জাতীয় ফল কোনটি?", "বাংলাদেশের জাতীয় পাখি কোনটি?", "বাংলাদেশের রাজধানী কোনটি?", "বাংলাদেশের দীর্ঘতম প্রাকৃতিক সমুদ্রসৈকত কোনটি?", "বিশ্বের বৃহত্তম একটানা ম্যানগ্রোভ বন কোনটি?", "বাংলাদেশে পদ্মা নামে পরিচিত প্রধান নদীটি কোনটি?", "বাংলাদেশ কোন সালে স্বাধীন হয়?", "ঢাকার কোন ঐতিহাসিক স্থাপনাটি মুঘল আমলে ১৭শ শতকে নির্মাণ শুরু হয়?", "বাংলাদেশের স্বাধীনতা দিবস কবে পালিত হয়?", "বাংলাদেশের বিজয় দিবস কবে পালিত হয়?", "বাংলাদেশের রাষ্ট্রভাষা কী?", "পহেলা বৈশাখ কোন ক্যালেন্ডারের নতুন বছরকে নির্দেশ করে?", "বাংলাদেশের জাতীয় সংগীতের রচয়িতা কে?", "বাংলাদেশের জাতীয় খেলা কোনটি?", "আন্তর্জাতিকভাবে বাংলাদেশ কোন খেলায় বিশেষভাবে পরিচিত?", "সালোকসংশ্লেষণের সময় উদ্ভিদ প্রধানত কোন গ্যাস গ্রহণ করে?", "শ্রীমঙ্গলের চা-বাগানের জন্য কোন জেলা বিখ্যাত?", "ষাট গম্বুজ মসজিদ কোন জেলায় অবস্থিত?", "পুঠিয়ার ঐতিহাসিক মন্দির কমপ্লেক্স কোন জেলার সঙ্গে সম্পর্কিত?", "ভাষা আন্দোলন বিশেষভাবে কোন সালের সঙ্গে সম্পর্কিত?", "বাংলাদেশের জাতীয় পতাকার প্রধান রং কী কী?", "বাংলাদেশ এশিয়ার কোন অংশে অবস্থিত?"], "o": [["গোলাপ", "শাপলা", "জুঁই", "গাঁদা"], ["রয়েল বেঙ্গল টাইগার", "এশীয় হাতি", "চিতাবাঘ", "চিত্রা হরিণ"], ["আম", "কাঁঠাল", "কলা", "পেয়ারা"], ["দোয়েল", "মাছরাঙা", "কাক", "ঈগল"], ["চট্টগ্রাম", "রাজশাহী", "ঢাকা", "খুলনা"], ["পতেঙ্গা সমুদ্রসৈকত", "কক্সবাজার সমুদ্রসৈকত", "কুয়াকাটা সমুদ্রসৈকত", "পারকি সমুদ্রসৈকত"], ["লাউয়াছড়া", "মধুপুর বন", "সুন্দরবন", "রেমা-কালেঙ্গা"], ["গঙ্গা", "তিস্তা", "কর্ণফুলী", "সুরমা"], ["১৯৪৭", "১৯৫২", "১৯৭১", "১৯৭৫"], ["আহসান মঞ্জিল", "লালবাগ কেল্লা", "জাতীয় সংসদ ভবন", "কার্জন হল"], ["২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর", "১৪ এপ্রিল"], ["২৬ মার্চ", "১৫ আগস্ট", "১৬ ডিসেম্বর", "২১ ফেব্রুয়ারি"], ["হিন্দি", "বাংলা", "উর্দু", "ইংরেজি"], ["গ্রেগরিয়ান ক্যালেন্ডার", "বাংলা ক্যালেন্ডার", "হিজরি ক্যালেন্ডার", "জুলিয়ান ক্যালেন্ডার"], ["কাজী নজরুল ইসলাম", "রবীন্দ্রনাথ ঠাকুর", "জসীমউদ্দীন", "মাইকেল মধুসূদন দত্ত"], ["ক্রিকেট", "ফুটবল", "কাবাডি", "হকি"], ["ক্রিকেট", "আইস হকি", "বেসবল", "রাগবি"], ["অক্সিজেন", "নাইট্রোজেন", "কার্বন ডাই-অক্সাইড", "হাইড্রোজেন"], ["মৌলভীবাজার", "বরিশাল", "বাগেরহাট", "নাটোর"], ["বাগেরহাট", "কুমিল্লা", "পাবনা", "দিনাজপুর"], ["রাজশাহী", "সিলেট", "ফেনী", "ঝালকাঠি"], ["১৯৪৮", "১৯৫২", "১৯৬৬", "১৯৭১"], ["নীল ও সাদা", "সবুজ ও লাল", "লাল ও হলুদ", "সবুজ ও নীল"], ["দক্ষিণ এশিয়া", "পূর্ব এশিয়া", "মধ্য এশিয়া", "পশ্চিম এশিয়া"]], "h": ["এটি বাংলাদেশের জলাভূমিতে প্রচুর দেখা যায়।", "সুন্দরবনের সঙ্গে পরিচিত এই বড় বিড়ালজাতীয় প্রাণীটি।", "এটি বড় আকারের ও সুগন্ধযুক্ত মিষ্টি ফল।", "বাংলা সংস্কৃতিতে বহুল পরিচিত একটি পাখি।", "এটি দেশের বৃহত্তম শহর ও রাজনৈতিক কেন্দ্র।", "এটি বাংলাদেশের দক্ষিণ-পূর্বাঞ্চলে অবস্থিত।", "বাংলাদেশ ও ভারতের বদ্বীপ অঞ্চলে এটি বিস্তৃত।", "বাংলাদেশে প্রবেশের পর নদীটির নাম পরিবর্তিত হয়।", "স্বাধীনতার সংগ্রাম ১৯৭১ সালে চূড়ান্ত পর্যায়ে পৌঁছায়।", "এটি পুরান ঢাকার একটি অসম্পূর্ণ মুঘল দুর্গ।", "মার্চ মাসের শেষদিকে দিবসটি পালিত হয়।", "১৯৭১ সালের বিজয়ের স্মরণে ডিসেম্বর মাসে দিবসটি পালিত হয়।", "দেশের সংখ্যাগরিষ্ঠ মানুষের ভাষা।", "এটি বাংলা নববর্ষের প্রথম দিন।", "তিনি সাহিত্যে প্রথম এশীয় নোবেলজয়ী।", "এটি একটি ঐতিহ্যবাহী দলীয় খেলা, যা হা-ডু-ডু নামেও পরিচিত।", "বাংলাদেশের পুরুষ জাতীয় দল এই ব্যাট-বল খেলায় অংশ নেয়।", "আলো ও পানির সঙ্গে এই গ্যাস ব্যবহার করে উদ্ভিদ খাদ্য তৈরি করে।", "শ্রীমঙ্গল সিলেট অঞ্চলে অবস্থিত।", "এটি দক্ষিণ-পশ্চিম বাংলাদেশের একটি UNESCO World Heritage Site।", "জেলাটি বাংলাদেশের উত্তর-পশ্চিমাঞ্চলে অবস্থিত।", "আন্দোলনের গুরুত্বপূর্ণ ঘটনাগুলো ১৯৫২ সালে ঘটে।", "সবুজ জমিনের ওপর একটি লাল বৃত্ত রয়েছে।", "এটি ভারতীয় উপমহাদেশের অংশ।"]};
+const questions = questionsEn.map((x,i)=>({ ...x, bn:BN_TRANSLATIONS.q[i], bno:BN_TRANSLATIONS.o[i], bnh:BN_TRANSLATIONS.h[i] }));
+
 let bank=[],used=[],current=null,score=0,count=0,answered=false,category="All";
 const $=id=>document.getElementById(id);
-function startQuiz(cat="All"){category=cat;score=0;count=0;used=[];bank=questions.filter(x=>cat==="All"||x.c===cat).sort(()=>Math.random()-.5);$("home").style.display="none";$("categories").style.display="none";$("result").style.display="none";$("quiz").style.display="block";window.scrollTo({top:0,behavior:"smooth"});loadQuestion()}
-function loadQuestion(){
-if(!bank.length){bank=questions.filter(x=>category==="All"||x.c===category).sort(()=>Math.random()-.5)}
-current=bank.pop(); used.push(current); count++; answered=false;
-$("counter").textContent=`Question ${count}`;$("score").textContent=`Score: ${score}`;
-$("progress").style.width=`${Math.min(100,(count%10||10)*10)}%`;
-$("category").textContent=current.c;$("difficulty").textContent=current.d;
-$("question").textContent=current.q;$("hint").textContent=current.h;$("hint").style.display="none";$("next").disabled=true;
-$("options").innerHTML=current.o.map((x,i)=>`<button class="option" onclick="answer(${i},this)"><span class="letter">${String.fromCharCode(65+i)}</span><span>${x}</span></button>`).join("");
+
+const CAT_META={
+ History:['📜','ইতিহাস ও ঐতিহ্য','Past & heritage'],Geography:['🗺️','ভূমি, নদী ও স্থান','Land, rivers & places'],
+ 'Liberation War':['🕊️','১৯৭১ ও স্বাধীনতা','1971 & independence'],Culture:['🎭','শিল্প ও ঐতিহ্য','Arts & traditions'],
+ National:['🇧🇩','জাতীয় প্রতীক ও তথ্য','Symbols & facts'],Sports:['🏏','খেলাধুলায় বাংলাদেশ','Bangladesh in sport'],
+ Science:['🔬','বিজ্ঞান ও প্রকৃতি','Science & nature'],Districts:['📍','প্রশাসনিক তথ্য','Administrative facts']
+};
+const UI={bn:{brand:'বাংলাদেশ GK',theme:'◐ থিম',tag:'🇧🇩 আনলিমিটেড জ্ঞান চ্যালেঞ্জ',hero:'বাংলাদেশ সম্পর্কে আপনি কতটা জানেন?',sub:'বাংলাদেশভিত্তিক সাধারণ জ্ঞানের অসংখ্য প্রশ্নে নিজের জ্ঞান যাচাই করুন। চাইলে নির্দিষ্ট ক্যাটাগরি বেছে নিন, অথবা সব ক্যাটাগরি একসঙ্গে খেলুন।',start:'কুইজ শুরু করুন →',explore:'ক্যাটাগরি দেখুন',choose:'ক্যাটাগরি বেছে নিন',shuffle:'প্রশ্নগুলো স্বয়ংক্রিয়ভাবে এলোমেলো হবে।',all:'সবগুলো',question:'প্রশ্ন',score:'স্কোর',hint:'💡 ইঙ্গিত',cat:'← ক্যাটাগরি',next:'পরের প্রশ্ন →',again:'আবার খেলুন',chooseAgain:'ক্যাটাগরি বেছে নিন',result:'কুইজ সেশন শেষ!'},en:{brand:'Bangladesh GK',theme:'◐ Theme',tag:'🇧🇩 Unlimited Knowledge Challenge',hero:'How well do you know Bangladesh?',sub:'Test yourself with an endless stream of Bangladesh-focused general knowledge questions. Pick a category or mix everything together.',start:'Start Unlimited Quiz →',explore:'Explore Categories',choose:'Choose a category',shuffle:'Questions are shuffled automatically.',all:'All',question:'Question',score:'Score',hint:'💡 Show hint',cat:'← Categories',next:'Next Question →',again:'Play Again',chooseAgain:'Choose Category',result:'Quiz session complete!'}};
+function renderCategories(){
+  const L=UI[lang];
+  const all=`<button class="cat" onclick="startQuiz('All')"><div class="icon">🇧🇩</div><b>${L.all}</b><small>${lang==='bn'?'সব ক্যাটাগরির প্রশ্ন':'Questions from every category'}</small></button>`;
+  const cards=Object.entries(CAT_META).map(([k,v])=>`<button class="cat" onclick="startQuiz('${k}')"><div class="icon">${v[0]}</div><b>${lang==='bn'?k==='History'?'ইতিহাস':k==='Geography'?'ভূগোল':k==='Liberation War'?'মুক্তিযুদ্ধ':k==='Culture'?'সংস্কৃতি':k==='National'?'জাতীয়':k==='Sports'?'খেলাধুলা':k==='Science'?'বিজ্ঞান':'জেলাসমূহ':k}</b><small>${lang==='bn'?v[1]:v[2]}</small></button>`).join('');
+  $('categoryGrid').innerHTML=all+cards;
 }
-function answer(i,el){if(answered)return;answered=true;document.querySelectorAll(".option").forEach((b,n)=>{b.disabled=true;if(n===current.a)b.classList.add("correct")});if(i!==current.a)el.classList.add("wrong");else score++;$("score").textContent=`Score: ${score}`;$("next").disabled=false}
-function nextQuestion(){loadQuestion()}
-function showHint(){$("hint").style.display="block"}
-function backHome(){$("quiz").style.display="none";$("result").style.display="none";$("home").style.display="flex";$("categories").style.display="block";window.scrollTo({top:0,behavior:"smooth"})}
-function restart(){startQuiz(category)}
-function toggleTheme(){document.body.classList.toggle("dark");if(document.body.classList.contains("dark")){document.body.style.background="#0b1713";document.body.style.color="#eef7f2"}else{document.body.style.background="";document.body.style.color=""}}
+function applyLanguage(){
+ const L=UI[lang]; document.documentElement.lang=lang;
+ $('brandText').textContent=L.brand;$('themeBtn').textContent=L.theme;$('tagText').textContent=L.tag;$('heroTitle').textContent=L.hero;$('heroSub').textContent=L.sub;$('startBtn').textContent=L.start;$('exploreBtn').textContent=L.explore;$('chooseTitle').textContent=L.choose;$('shuffleText').textContent=L.shuffle;$('langBtn').textContent=lang==='bn'?'EN':'বাংলা';
+ renderCategories(); if(current) renderQuestion();
+}
+function toggleLanguage(){lang=lang==='bn'?'en':'bn';localStorage.setItem('gkQuizLang',lang);applyLanguage();}
+function renderQuestion(){
+ const L=UI[lang];$('counter').textContent=`${L.question} ${count}`;$('score').textContent=`${L.score}: ${score}`;$('question').textContent=lang==='bn'?current.bn:current.q;$('hint').textContent=lang==='bn'?current.bnh:current.h;$('hintBtn').textContent=L.hint;$('catBtn').textContent=L.cat;$('next').textContent=L.next;$('category').textContent=lang==='bn'?(CAT_META[current.c]||['',current.c])[1]:current.c;$('difficulty').textContent=lang==='bn'?(current.d==='Easy'?'সহজ':'মাঝারি'):current.d;
+ $('options').innerHTML=(lang==='bn'?current.bno:current.o).map((x,i)=>`<button class="option" onclick="answer(${i},this)"><span class="letter">${String.fromCharCode(65+i)}</span><span>${x}</span></button>`).join('');
+}
+function startQuiz(cat='All'){category=cat;score=0;count=0;bank=questions.filter(x=>cat==='All'||x.c===cat).sort(()=>Math.random()-.5);$('home').style.display='none';$('categories').style.display='none';$('result').style.display='none';$('quiz').style.display='block';window.scrollTo({top:0,behavior:'smooth'});loadQuestion()}
+function loadQuestion(){if(!bank.length)bank=questions.filter(x=>category==='All'||x.c===category).sort(()=>Math.random()-.5);current=bank.pop();count++;answered=false;$('progress').style.width=`${Math.min(100,(count%10||10)*10)}%`;$('hint').style.display='none';$('next').disabled=true;renderQuestion()}
+function answer(i,el){if(answered)return;answered=true;document.querySelectorAll('.option').forEach((b,n)=>{b.disabled=true;if(n===current.a)b.classList.add('correct')});if(i!==current.a)el.classList.add('wrong');else score++;$('score').textContent=`${UI[lang].score}: ${score}`;$('next').disabled=false}
+renderCategories();
+function nextQuestion(){loadQuestion()} function showHint(){$('hint').style.display='block'} function backHome(){$('quiz').style.display='none';$('result').style.display='none';$('home').style.display='flex';$('categories').style.display='block';window.scrollTo({top:0,behavior:'smooth'})} function restart(){startQuiz(category)} function toggleTheme(){document.body.classList.toggle('dark');localStorage.setItem('gkQuizTheme',document.body.classList.contains('dark')?'dark':'light')}
 </script>
 
-<footer class="site-footer" style="text-align:center;padding:30px 18px 22px;margin-top:40px">
-  <div class="copyright">© 2026 Bangladesh General Knowledge</div>
-  <div class="developed" style="margin-top:7px">Developed by Bidhan Kumar PK with <span class="love-heart" aria-label="love">❤️</span></div>
-  <div class="footer-socials" aria-label="Social links">
-    <a href="https://www.facebook.com/truly.BiDHAN" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="https://www.instagram.com/truly_bidhan" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://linkedin.com/in/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-    <a href="https://github.com/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-    <a href="https://wa.me/+8801793381366" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><div class="footer-title" id="footerTitle">বাংলাদেশ সাধারণ জ্ঞান</div><div class="footer-sub" id="footerSub">জ্ঞান বাড়াই, কুইজ খেলি — বাংলা ও English দুটো ভাষাতেই।</div></div>
+    <div><div class="social-title" id="socialTitle">আমাকে ফলো করুন</div><div class="socials">
+      <a class="social" href="https://www.facebook.com/truly.BiDHAN" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a class="social" href="https://www.instagram.com/truly_bidhan" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a class="social" href="https://linkedin.com/in/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a class="social" href="https://github.com/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a class="social" href="https://wa.me/+8801793381366" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div></div>
   </div>
+  <div class="footer-bottom"><span>© 2026 <span id="footerName">বাংলাদেশ সাধারণ জ্ঞান</span></span><span id="developed">Developed by Bidhan Kumar PK with <span class="love-heart">❤️</span></span></div>
 </footer>
-
-
+<button class="floating-lang" onclick="toggleLanguage()" aria-label="Switch language" id="floatingLang">EN</button>
 <script>
-(() => {
-  let lang = localStorage.getItem("gkQuizLang") || "bn";
-  const labels = {
-    bn: {start:"কুইজ শুরু করুন",next:"পরের প্রশ্ন",restart:"আবার শুরু করুন",hint:"ইঙ্গিত",all:"সবগুলো",title:"বাংলাদেশ সাধারণ জ্ঞান কুইজ",sub:"বাংলাদেশ সম্পর্কে আপনার জ্ঞান যাচাই করুন — মজা করে, শিখতে শিখতে!",footer:"© 2026 বাংলাদেশ সাধারণ জ্ঞান",dev:"Bidhan Kumar PK-এর ভালোবাসায় তৈরি "},
-    en: {start:"Start Quiz",next:"Next Question",restart:"Restart",hint:"Hint",all:"All",title:"Bangladesh General Knowledge Quiz",sub:"Test your knowledge about Bangladesh — learn while having fun!",footer:"© 2026 Bangladesh General Knowledge",dev:"Developed by Bidhan Kumar PK with "}
-  };
-  function applyLanguage(){
-    const L=labels[lang];
-    document.documentElement.lang=lang;
-    const b=document.getElementById("languageToggle");
-    if(b){b.textContent=lang==="bn"?"EN":"বাংলা";b.title=lang==="bn"?"Switch to English":"বাংলায় পরিবর্তন করুন";}
-    const h=document.querySelector("h1"); if(h) h.textContent=L.title;
-    const p=document.querySelector(".hero p"); if(p) p.textContent=L.sub;
-    document.querySelectorAll("button").forEach(b=>{
-      const t=b.textContent.trim();
-      if([labels.bn.start,labels.en.start].includes(t)) b.textContent=L.start;
-      else if([labels.bn.next,labels.en.next].includes(t)) b.textContent=L.next;
-      else if([labels.bn.restart,labels.en.restart].includes(t)) b.textContent=L.restart;
-      else if([labels.bn.hint,labels.en.hint].includes(t)) b.textContent=L.hint;
-      else if([labels.bn.all,labels.en.all].includes(t)) b.textContent=L.all;
-    });
-    const c=document.querySelector(".site-footer .copyright"); if(c)c.textContent=L.footer;
-    const d=document.querySelector(".site-footer .developed"); if(d)d.innerHTML=L.dev+'<span class="love-heart">❤️</span>';
-  }
-  document.addEventListener("click",e=>{
-    if(e.target.closest("#languageToggle")){lang=lang==="bn"?"en":"bn";localStorage.setItem("gkQuizLang",lang);applyLanguage();}
-  });
-  document.addEventListener("DOMContentLoaded",applyLanguage);
-  setTimeout(applyLanguage,50);
-})();
-</script>
-
-</body>
+function updateFooter(){const bn=lang==='bn';$('footerTitle').textContent=bn?'বাংলাদেশ সাধারণ জ্ঞান':'Bangladesh General Knowledge';$('footerSub').textContent=bn?'জ্ঞান বাড়াই, কুইজ খেলি — বাংলা ও English দুটো ভাষাতেই।':'Learn more, play more — available in both Bangla and English.';$('socialTitle').textContent=bn?'আমাকে ফলো করুন':'Follow me';$('footerName').textContent=bn?'বাংলাদেশ সাধারণ জ্ঞান':'Bangladesh General Knowledge';$('developed').innerHTML=bn?'Bidhan Kumar PK-এর ভালোবাসায় তৈরি <span class="love-heart">❤️</span>':'Developed by Bidhan Kumar PK with <span class="love-heart">❤️</span>';$('floatingLang').textContent=bn?'EN':'বাংলা'}
+const oldApply=applyLanguage;applyLanguage=function(){oldApply();updateFooter()};updateFooter();
+</script></body>
 </html>
