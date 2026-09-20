@@ -19,6 +19,7 @@ button{font:inherit;cursor:pointer}.wrap{width:min(1120px,92%);margin:auto}.top{
 @media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.hero{padding:35px 25px;min-height:430px}.options{grid-template-columns:1fr}.top{padding:15px 0}.hero h1{letter-spacing:-1px}}
 @media(max-width:500px){.grid{grid-template-columns:1fr 1fr}.cat{padding:15px}.section{padding:28px 0}.hero{border-radius:22px}.hero p{font-size:16px}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 <div class="wrap">
@@ -112,5 +113,52 @@ function backHome(){$("quiz").style.display="none";$("result").style.display="no
 function restart(){startQuiz(category)}
 function toggleTheme(){document.body.classList.toggle("dark");if(document.body.classList.contains("dark")){document.body.style.background="#0b1713";document.body.style.color="#eef7f2"}else{document.body.style.background="";document.body.style.color=""}}
 </script>
+
+<footer class="site-footer" style="text-align:center;padding:30px 18px 22px;margin-top:40px">
+  <div class="copyright">© 2026 Bangladesh General Knowledge</div>
+  <div class="developed" style="margin-top:7px">Developed by Bidhan Kumar PK with <span class="love-heart" aria-label="love">❤️</span></div>
+  <div class="footer-socials" aria-label="Social links">
+    <a href="https://www.facebook.com/truly.BiDHAN" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/truly_bidhan" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://linkedin.com/in/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://github.com/bidhanpk" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://wa.me/+8801793381366" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+  let lang = localStorage.getItem("gkQuizLang") || "bn";
+  const labels = {
+    bn: {start:"কুইজ শুরু করুন",next:"পরের প্রশ্ন",restart:"আবার শুরু করুন",hint:"ইঙ্গিত",all:"সবগুলো",title:"বাংলাদেশ সাধারণ জ্ঞান কুইজ",sub:"বাংলাদেশ সম্পর্কে আপনার জ্ঞান যাচাই করুন — মজা করে, শিখতে শিখতে!",footer:"© 2026 বাংলাদেশ সাধারণ জ্ঞান",dev:"Bidhan Kumar PK-এর ভালোবাসায় তৈরি "},
+    en: {start:"Start Quiz",next:"Next Question",restart:"Restart",hint:"Hint",all:"All",title:"Bangladesh General Knowledge Quiz",sub:"Test your knowledge about Bangladesh — learn while having fun!",footer:"© 2026 Bangladesh General Knowledge",dev:"Developed by Bidhan Kumar PK with "}
+  };
+  function applyLanguage(){
+    const L=labels[lang];
+    document.documentElement.lang=lang;
+    const b=document.getElementById("languageToggle");
+    if(b){b.textContent=lang==="bn"?"EN":"বাংলা";b.title=lang==="bn"?"Switch to English":"বাংলায় পরিবর্তন করুন";}
+    const h=document.querySelector("h1"); if(h) h.textContent=L.title;
+    const p=document.querySelector(".hero p"); if(p) p.textContent=L.sub;
+    document.querySelectorAll("button").forEach(b=>{
+      const t=b.textContent.trim();
+      if([labels.bn.start,labels.en.start].includes(t)) b.textContent=L.start;
+      else if([labels.bn.next,labels.en.next].includes(t)) b.textContent=L.next;
+      else if([labels.bn.restart,labels.en.restart].includes(t)) b.textContent=L.restart;
+      else if([labels.bn.hint,labels.en.hint].includes(t)) b.textContent=L.hint;
+      else if([labels.bn.all,labels.en.all].includes(t)) b.textContent=L.all;
+    });
+    const c=document.querySelector(".site-footer .copyright"); if(c)c.textContent=L.footer;
+    const d=document.querySelector(".site-footer .developed"); if(d)d.innerHTML=L.dev+'<span class="love-heart">❤️</span>';
+  }
+  document.addEventListener("click",e=>{
+    if(e.target.closest("#languageToggle")){lang=lang==="bn"?"en":"bn";localStorage.setItem("gkQuizLang",lang);applyLanguage();}
+  });
+  document.addEventListener("DOMContentLoaded",applyLanguage);
+  setTimeout(applyLanguage,50);
+})();
+</script>
+
 </body>
 </html>
